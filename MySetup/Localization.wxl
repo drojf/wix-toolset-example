@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- See https://stackoverflow.com/questions/55221550/how-show-version-number-in-title-of-installation-in-wix -->
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="WelcomeDlgTitle">{\WixUI_Font_Bigger}Welcome to the [ProductName] [ProductVersion] Setup Wizard</String>
+</WixLocalization>
