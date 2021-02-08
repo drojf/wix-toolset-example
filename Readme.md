@@ -12,9 +12,11 @@
 - Localization.wxl - a localization file, but in this case only used for changing some of the default text in the installer
 - obj - contains temporary build files. NOTE: it is useful to examine these files, especially the `_HarvestedApplicationComponents_dir.wxs` to check if files have been harvested correctly
 - bin - installer .msi file output folder
+- resources - any additional files (such as images and icons) necessary to build the installer
 
 ## Known Issues
 
+- The msbuild path in `build.bat` is hardcoded for Visual Studio 2019
 - There are some warnings printed during the build process which are not yet sorted out
 - Switching between "Debug" and "Release" is not yet setup properly - always uses "Debug" for now
 - Wix is hard to google (due to the web publishing platform of the same name), so you'll need to google "Wix Toolset"
@@ -23,6 +25,7 @@
 
 - Install [Wix Toolset](https://wixtoolset.org/releases/)
 - Do not install the Visual Studio extension (configuring the installer using the `.wixproj` file seems to conflict with configuring using Visual Studio's GUI)
+- You will need to modify the msbuild path in `build.bat` as it is hardcoded for Visual Studio 2019
 
 ## Getting debug output from msi file
 

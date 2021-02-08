@@ -17,6 +17,12 @@
         <UIRef Id="WixUI_Custom"/>
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
         <Property Id="EXECUTABLE_FILENAME" Value="MyApplication.exe"/>
+
+        <!-- Wix requires that shortcut icons' Id have the same extension as the target file, hence the .exe in the icon Id -->
+        <Icon Id="application_icon.exe" SourceFile="resources\application.ico"/>
+
+        <!-- ARPPRODUCTICON is a special Id which sets the icon in Add/Remove Programs (see https://wixtoolset.org/documentation/manual/v3/howtos/ui_and_localization/configure_arp_appearance.html) -->
+        <Property Id="ARPPRODUCTICON" Value="application_icon.exe" />
     </Product>
 
     <!--This fragment is a modified version of https://github.com/wixtoolset/wix3/blob/develop/src/ext/UIExtension/wixlib/WixUI_InstallDir.wxs
@@ -92,7 +98,7 @@
     <Fragment>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="{5062298d-191c-495a-be2d-8e2c57230e53}">
-                <Shortcut Id="ApplicationStartMenuShortcut" Name="My Application Name $(var.ProductVersion)" Description="My Application Description" Target="[INSTALLFOLDER][EXECUTABLE_FILENAME]" WorkingDirectory="INSTALLFOLDER"/>
+                <Shortcut Id="ApplicationStartMenuShortcut" Name="My Application Name $(var.ProductVersion)" Description="My Application Description" Target="[INSTALLFOLDER][EXECUTABLE_FILENAME]" WorkingDirectory="INSTALLFOLDER" Icon="application_icon.exe"/>
                 <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
                 <RegistryValue Root="HKCU" Key="Software\MyCompany\MyApplicationName" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
             </Component>
