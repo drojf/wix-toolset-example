@@ -1,27 +1,33 @@
 # Readme
 
+## File/Folder structure
+
+`MyApplication` - Contains a dummy C# project. Replace with your own application which you want to package
+
+`MySetup` - Contains all the files necessary to build the installer
+
+- `build.bat` - run this file to build the installer (run in a command window so you can see the output)
+- MySetup.wixproj - contains some configuration information read by msbuild to build the wix project, but also some stuff you wouldn't expect, like the folder scanning settings (harvest).
+- Product.wxs - contains the main installer configuration
+- Localization.wxl - a localization file, but in this case only used for changing some of the default text in the installer
+- obj - contains temporary build files. NOTE: it is useful to examine these files, especially the `_HarvestedApplicationComponents_dir.wxs` to check if files have been harvested correctly
+- bin - installer .msi file output folder
+
+## Known Issues
+
+In `Product.wxs`, the shortcut uses a link like `Target="[#filBF0BC55BA474DA2517DA5EDFFD7B1501]"` (this is the id of the executable file). This filename will change if the certain options are changed, and you'll need to copy the file id again from the `obj/Debug/_HarvestedApplicationComponents_dir.wxs` folder.
+
 ## Prerequisites
 
-- Install Wix toolkit
-- ~~Instal Visual Studio Wix extension~~ using from visual studio causes problems - just run msbuild directly
+- Install [Wix Toolset](https://wixtoolset.org/releases/)
+- Do not install the Visual Studio extension (configuring the installer using the `.wixproj` file seems to conflictt with configuring using Visual Studio)
 
 ## Required references
 
-Add following references to the Wix project (MySetup in this example):
+This is already done for you in the `MySetup.wixproj`. The following references are needed:
 
-- to project being deployed
-- to WixUIExtension, needed for UI (C:\Program Files (x86)\WiX Toolset v3.11\bin\\WixUIExtension.dll)
-
-## XML additions
-
-Add mondo (see here): https://www.firegiant.com/wix/tutorial/user-interface/ui-wizardry/
-
-```xml
-<Product>
-<UIRef Id="WixUI_Mondo" />
-<UIRef Id="WixUI_ErrorProgressText" />
-</Product>
-```
+- Add the <WixExtension> "WixUIExtension"
+- Add a <ProjectReference> to the project being deployed
 
 ## Tutorials and Examples
 
