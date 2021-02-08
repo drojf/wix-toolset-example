@@ -19,17 +19,34 @@
 - Switching between "Debug" and "Release" is not yet setup properly - always uses "Debug" for now
 - Wix is hard to google (due to the web publishing platform of the same name), so you'll need to google "Wix Toolset"
 
-## Prerequisites
+## Requirements for building the installer
 
 - Install [Wix Toolset](https://wixtoolset.org/releases/)
-- Do not install the Visual Studio extension (configuring the installer using the `.wixproj` file seems to conflictt with configuring using Visual Studio)
+- Do not install the Visual Studio extension (configuring the installer using the `.wixproj` file seems to conflict with configuring using Visual Studio's GUI)
 
-## Required references
+## Getting debug output from msi file
 
-This is already done for you in the `MySetup.wixproj`. The following references are needed:
+Execute the msi file with `msiexec /i MySetup.msi /l* out.log`
 
-- Add the <WixExtension> "WixUIExtension"
-- Add a <ProjectReference> to the project being deployed
+## Notes on this particular project
+
+### Required references
+
+This is already done for you in the `MySetup.wixproj` (please reference that file when looking at the below). The following references are needed:
+
+- Add the `<WixExtension>` "WixUIExtension"
+- Add a `<ProjectReference>` to the project being deployed
+
+### Adding lots of files using `<HarvestDirectory>`
+
+- The `.wixproj` file is setup to scan the app bin path (see the path next to `<HarvestPath>` in `MySetup.wixproj`) for files and add them to the project automatically
+- Based on these examples: https://stackoverflow.com/questions/2605907/wix-heatdirectory-task-setting-the-preprocessorvariable
+- Also see https://wixtoolset.org/documentation/manual/v3/msbuild/target_reference/harvestdirectory.html
+
+### Installer Versioning
+
+- On each new release of the installer, update the "Version" field in `<Product Version="1.0.2.0" ...>` to `<Product Version="1.0.3.0">`
+- **You must update the first 3 parts of the version, otherwise Windows doesn't treat it as a new version** - see https://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html
 
 ## Tutorials and Examples
 
@@ -38,18 +55,3 @@ This is already done for you in the `MySetup.wixproj`. The following references 
 - https://github.com/aykanatm/wixtoolset-example/blob/master/WixToolsetExample/TestApp.Setup/Product.wxs
 - Skip license / custom UI: https://stackoverflow.com/a/597060/848627
 - Adding files from directory automatically using HarvestDirectory: https://stackoverflow.com/questions/2605907/wix-heatdirectory-task-setting-the-preprocessorvariable
-
-## Getting debug output from msi file
-
-Execute the msi file with `msiexec /i MySetup.msi /l* out.log`
-
-## Adding lots of files
-
-- The wixproj file is setup to scan the app bin path (see the value next to `<HarvestPath>`) for files and add them to the project automatically
-- Based on these examples: https://stackoverflow.com/questions/2605907/wix-heatdirectory-task-setting-the-preprocessorvariable
-- Also see https://wixtoolset.org/documentation/manual/v3/msbuild/target_reference/harvestdirectory.html
-
-## Installer Versioning
-
-- On each new release of the installer, update the "Version" field in `<Product Version="1.0.2.0" ...>` to `<Product Version="1.0.4.0">` (don't update 4th part of version - see below)
-- **You must update the first 3 parts of the version, otherwise windows doesn't treat as a new version** - see https://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html
