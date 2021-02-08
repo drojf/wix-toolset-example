@@ -16,6 +16,7 @@
         <!--Uses the custom UI fragment defined below -->
         <UIRef Id="WixUI_Custom"/>
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
+        <Property Id="EXECUTABLE_FILENAME" Value="MyApplication.exe"/>
     </Product>
 
     <!--This fragment is a modified version of https://github.com/wixtoolset/wix3/blob/develop/src/ext/UIExtension/wixlib/WixUI_InstallDir.wxs
@@ -91,7 +92,7 @@
     <Fragment>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="{5062298d-191c-495a-be2d-8e2c57230e53}">
-                <Shortcut Id="ApplicationStartMenuShortcut" Name="My Application Name $(var.ProductVersion)" Description="My Application Description" Target="[#filBF0BC55BA474DA2517DA5EDFFD7B1501]" WorkingDirectory="INSTALLFOLDER"/>
+                <Shortcut Id="ApplicationStartMenuShortcut" Name="My Application Name $(var.ProductVersion)" Description="My Application Description" Target="[INSTALLFOLDER][EXECUTABLE_FILENAME]" WorkingDirectory="INSTALLFOLDER"/>
                 <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
                 <RegistryValue Root="HKCU" Key="Software\MyCompany\MyApplicationName" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
             </Component>

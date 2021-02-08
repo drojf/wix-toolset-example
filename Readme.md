@@ -15,7 +15,9 @@
 
 ## Known Issues
 
-In `Product.wxs`, the shortcut uses a link like `Target="[#filBF0BC55BA474DA2517DA5EDFFD7B1501]"` (this is the id of the executable file). This filename will change if the certain options are changed, and you'll need to copy the file id again from the `obj/Debug/_HarvestedApplicationComponents_dir.wxs` folder.
+- There are some warnings printed during the build process which are not yet sorted out
+- Switching between "Debug" and "Release" is not yet setup properly - always uses "Debug" for now
+- Wix is hard to google (due to the web publishing platform of the same name), so you'll need to google "Wix Toolset"
 
 ## Prerequisites
 
