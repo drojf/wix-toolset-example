@@ -43,6 +43,7 @@
       <ComponentGroupName>HarvestedApplicationComponents</ComponentGroupName>
       <PreprocessorVariable>var.HarvestPath</PreprocessorVariable>
       <SuppressRootDirectory>True</SuppressRootDirectory>
+      <Transforms>HeatdirectoryShortcutTransform.xml</Transforms>
     </HarvestDirectory>
   </ItemGroup>
   <ItemGroup>

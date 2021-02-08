@@ -31,6 +31,10 @@ This is already done for you in the `MySetup.wixproj`. The following references 
 - Add the <WixExtension> "WixUIExtension"
 - Add a <ProjectReference> to the project being deployed
 
+## Shortcut Setup
+
+https://stackoverflow.com/questions/41140034/how-to-create-shortcuts-to-files-harvested-by-heat-exe
+
 ## Tutorials and Examples
 
 - [wix official docs](https://wixtoolset.org/documentation/) - samples on some of these pages
