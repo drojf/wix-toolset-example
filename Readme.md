@@ -16,16 +16,15 @@
 
 ## Known Issues
 
-- The msbuild path in `build.bat` is hardcoded for Visual Studio 2019
 - There are some warnings printed during the build process which are not yet sorted out
 - Switching between "Debug" and "Release" is not yet setup properly - always uses "Debug" for now
 - Wix is hard to google (due to the web publishing platform of the same name), so you'll need to google "Wix Toolset"
 
 ## Requirements for building the installer
 
+- Install Visual Studio 2017 Update 2 or newer (VS2019 etc is fine). See `MySetup/build.bat` for details.
 - Install [Wix Toolset](https://wixtoolset.org/releases/)
-- Do not install the Visual Studio extension (configuring the installer using the `.wixproj` file seems to conflict with configuring using Visual Studio's GUI)
-- You will need to modify the msbuild path in `build.bat` as it is hardcoded for Visual Studio 2019
+- **Do not** install the Wix Toolset Visual Studio extension (Visual Studio's GUI for configuring the project conflicts with manually editing the `.wixproj` file)
 
 ## Getting debug output from msi file
 
